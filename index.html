@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Евгений Крамер · Android-разработчик</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0A0C10;
+            color: #E8EDF2;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #FFFFFF 0%, #A0AAB5 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #3B82F6;
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            color: #9CA3AF;
+            border-left: 2px solid #3B82F6;
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        /* Buttons & links */
+        .btn {
+            display: inline-block;
+            background: #1E293B;
+            color: #E8EDF2;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border: 1px solid #334155;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #3B82F6;
+            border-color: #3B82F6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563EB;
+            transform: translateY(-2px);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background: #2D3A4E;
+        }
+
+        /* Language Switcher */
+        .lang-switch {
+            position: fixed;
+            top: 20px;
+            right: 24px;
+            z-index: 1000;
+            display: flex;
+            gap: 8px;
+            background: #111827;
+            padding: 6px;
+            border-radius: 60px;
+            border: 1px solid #2D3748;
+            backdrop-filter: blur(8px);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #94A3B8;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .lang-btn.active {
+            background: #3B82F6;
+            color: white;
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: #1E293B;
+            color: #E8EDF2;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid #1E293B;
+        }
+
+        .hero {
+            padding-top: 100px;
+            padding-bottom: 60px;
+        }
+
+        /* Skills grid */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        .skill-badge {
+            background: #111827;
+            border: 1px solid #2D3748;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #CBD5E1;
+        }
+
+        /* Project card */
+        .project-card {
+            background: #111827;
+            border-radius: 24px;
+            padding: 32px;
+            border: 1px solid #1E293B;
+            transition: all 0.25s;
+        }
+
+        .project-card:hover {
+            border-color: #3B82F6;
+            transform: translateY(-4px);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .tech-tag {
+            background: #1E293B;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #94A3B8;
+        }
+
+        .component-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            background: #0F1217;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .component-table th, .component-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #1E293B;
+        }
+
+        .component-table th {
+            background: #1A1F2A;
+            font-weight: 600;
+            color: #CBD5E1;
+        }
+
+        .component-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Philosophy quote */
+        .philosophy {
+            background: linear-gradient(135deg, #0F172A 0%, #111827 100%);
+            border-radius: 32px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 1px solid #2D3748;
+        }
+
+        .quote {
+            font-size: 1.5rem;
+            font-weight: 500;
+            font-style: normal;
+            color: #F0F4FA;
+            margin-bottom: 16px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: #6B7280;
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.6rem; }
+            .hero { padding-top: 80px; }
+            section { padding: 50px 0; }
+            .container { padding: 0 20px; }
+            .philosophy { padding: 24px; }
+            .quote { font-size: 1.2rem; }
+            .lang-switch { top: 12px; right: 16px; }
+            .lang-btn { padding: 6px 14px; font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Language Switcher -->
+<div class="lang-switch">
+    <button class="lang-btn active" data-lang="ru">РУС</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+</div>
+
+<div class="container">
+    <!-- Hero -->
+    <section class="hero">
+        <h1 data-ru="Евгений Крамер" data-en="Evgeny Kramer">Евгений Крамер</h1>
+        <div class="tagline">
+            <span data-ru="Android-разработчик · Clean Architecture · AI-интеграции" data-en="Android Developer · Clean Architecture · AI Integrations">Android-разработчик · Clean Architecture · AI-интеграции</span>
+        </div>
+        <p style="font-size: 1.2rem; max-width: 720px; margin: 20px 0 32px 0; color: #B0B8C5;">
+            <span data-ru="«ИИ экономит главный ресурс — время. Я внедряю это в каждую строку кода»" data-en="«AI saves the most valuable resource — time. I embed this into every line of code»">«ИИ экономит главный ресурс — время. Я внедряю это в каждую строку кода»</span>
+        </p>
+        <div>
+            <a href="#project" class="btn btn-primary" style="margin-right: 12px;">
+                <span data-ru="Смотреть проект" data-en="View Project">Смотреть проект</span>
+            </a>
+            <a href="#contact" class="btn">
+                <span data-ru="Связаться" data-en="Contact">Связаться</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Philosophy block -->
+    <div class="philosophy">
+        <div class="quote">
+            <span data-ru="⚡ Время — единственный невосполнимый ресурс" data-en="⚡ Time is the only non-renewable resource">⚡ Время — единственный невосполнимый ресурс</span>
+        </div>
+        <p style="font-size: 1rem; color: #CBD5E1; margin-bottom: 20px;">
+            <span data-ru="Я строю приложения, которые не заставляют ждать. Стриминг ответов, офлайн-кэш, асинхронность без лагов — это стандарт, а не опция. ИИ ускоряет разработку, но не подменяет мышление." 
+                  data-en="I build apps that don't make you wait. Response streaming, offline cache, lag-free asynchrony — standard, not optional. AI accelerates development but doesn't replace thinking.">
+                Я строю приложения, которые не заставляют ждать. Стриминг ответов, офлайн-кэш, асинхронность без лагов — это стандарт, а не опция. ИИ ускоряет разработку, но не подменяет мышление.
+            </span>
+        </p>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+            <span style="background: #1E293B; padding: 6px 14px; border-radius: 20px;" data-ru="⚡ Мгновенный UX" data-en="⚡ Instant UX">⚡ Мгновенный UX</span>
+            <span style="background: #1E293B; padding: 6px 14px; border-radius: 20px;" data-ru="🔒 Безопасность без жертв" data-en="🔒 Security without sacrifices">🔒 Безопасность без жертв</span>
+            <span style="background: #1E293B; padding: 6px 14px; border-radius: 20px;" data-ru="🧠 ИИ для ускорения, а не игрушка" data-en="🧠 AI for acceleration, not a toy">🧠 ИИ для ускорения, а не игрушка</span>
+        </div>
+    </div>
+
+    <!-- Main project -->
+    <section id="project">
+        <h2><span data-ru="🤖 Флагманский проект — AI-клиент" data-en="🤖 Flagship Project — AI Client">🤖 Флагманский проект — AI-клиент</span></h2>
+        <div class="project-card">
+            <h3 style="font-size: 1.6rem;">
+                <span data-ru="Android AI-клиент нового поколения" data-en="Next-gen Android AI Client">Android AI-клиент нового поколения</span>
+            </h3>
+            <p style="margin-bottom: 16px; color: #CBD5E1;">
+                <span data-ru="Не просто обёртка над ChatGPT. Полноценное приложение со стримингом, кэшем, офлайн-доступом и тактильной отдачей. Спроектировано с нуля на Clean Architecture." 
+                      data-en="Not just a ChatGPT wrapper. A full-featured app with streaming, cache, offline access and haptic feedback. Built from scratch with Clean Architecture.">
+                    Не просто обёртка над ChatGPT. Полноценное приложение со стримингом, кэшем, офлайн-доступом и тактильной отдачей. Спроектировано с нуля на Clean Architecture.
+                </span>
+            </p>
+            
+            <table class="component-table">
+                <thead>
+                    <tr>
+                        <th data-ru="Компонент" data-en="Component">Компонент</th>
+                        <th data-ru="Что сделал" data-en="Implementation">Что сделал</th>
+                        <th data-ru="Зачем (экономия времени)" data-en="Why (time saving)">Зачем (экономия времени)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Clean Arch + Hilt</td><td data-ru="Разделил логику, данные и UI" data-en="Separated logic, data & UI">Разделил логику, данные и UI</td><td data-ru="Быстро нахожу и чиню баги" data-en="Fast debugging and fixes">Быстро нахожу и чиню баги</td></tr>
+                    <tr><td>Coroutines + Flow</td><td data-ru="Асинхронность без блокировок" data-en="Non-blocking async">Асинхронность без блокировок</td><td data-ru="UI не зависает — пользователь не нервничает" data-en="Smooth UI — user stays calm">UI не зависает — пользователь не нервничает</td></tr>
+                    <tr><td>Retrofit + Groq API стриминг</td><td data-ru="Ответы приходят токен за токеном" data-en="Token-by-token responses">Ответы приходят токен за токеном</td><td data-ru="Читаешь ответ во время генерации — нулевое ожидание" data-en="Read while generating — zero waiting">Читаешь ответ во время генерации — нулевое ожидание</td></tr>
+                    <tr><td>Room + DataStore</td><td data-ru="Кэш и локальное хранилище" data-en="Cache & local storage">Кэш и локальное хранилище</td><td data-ru="Офлайн-доступ без повторных запросов" data-en="Offline access without repeat requests">Офлайн-доступ без повторных запросов</td></tr>
+                    <tr><td>SHA-256</td><td data-ru="Хэширование паролей" data-en="Password hashing">Хэширование паролей</td><td data-ru="Безопасно и быстро" data-en="Secure and fast">Безопасно и быстро</td></tr>
+                    <tr><td>Jetpack Compose</td><td data-ru="Кастомная тема + анимации + хептика" data-en="Custom theme + animations + haptics">Кастомная тема + анимации + хептика</td><td data-ru="Приятно использовать с первой секунды" data-en="Pleasant from the first second">Приятно использовать с первой секунды</td></tr>
+                </tbody>
+             </table>
+
+            <div class="tech-stack">
+                <span class="tech-tag">Kotlin</span>
+                <span class="tech-tag">Jetpack Compose</span>
+                <span class="tech-tag">Clean Architecture</span>
+                <span class="tech-tag">MVVM</span>
+                <span class="tech-tag">Hilt</span>
+                <span class="tech-tag">Room</span>
+                <span class="tech-tag">Retrofit</span>
+                <span class="tech-tag">Coroutines + Flow</span>
+                <span class="tech-tag">Groq API</span>
+                <span class="tech-tag">SHA-256</span>
+            </div>
+            <p style="margin-top: 20px; color: #9CA3AF;">
+                <span data-ru="✅ Результат: пользователь получает ответ мгновенно, интерфейс плавный, данные защищены, а код легко тестировать." 
+                      data-en="✅ Result: instant responses, smooth UI, protected data, easily testable code.">
+                    ✅ Результат: пользователь получает ответ мгновенно, интерфейс плавный, данные защищены, а код легко тестировать.
+                </span>
+            </p>
+        </div>
+    </section>
+
+    <!-- Skills & tools -->
+    <section>
+        <h2><span data-ru="🛠 Инструменты и скиллы" data-en="🛠 Tools & Skills">🛠 Инструменты и скиллы</span></h2>
+        <div class="skills-grid">
+            <span class="skill-badge">Kotlin</span>
+            <span class="skill-badge">Jetpack Compose</span>
+            <span class="skill-badge">Clean Architecture</span>
+            <span class="skill-badge">MVVM</span>
+            <span class="skill-badge">Hilt</span>
+            <span class="skill-badge">Room</span>
+            <span class="skill-badge">Retrofit</span>
+            <span class="skill-badge">DataStore</span>
+            <span class="skill-badge">Coroutines</span>
+            <span class="skill-badge">Flow</span>
+            <span class="skill-badge">Groq API</span>
+            <span class="skill-badge">SHA-256</span>
+            <span class="skill-badge">Git</span>
+            <span class="skill-badge" data-ru="AI-ассистенты" data-en="AI Assistants">AI-ассистенты</span>
+        </div>
+        <p style="margin-top: 24px; color: #9CA3AF;">
+            <span data-ru="Я не копирую — я понимаю. Выбираю правильный инструмент без лишних итераций. ИИ даёт мне +30% к скорости разработки: генерация моков, тесты, рефакторинг." 
+                  data-en="I don't just copy — I understand. Choosing the right tool without extra iterations. AI gives me +30% development speed: mock generation, tests, refactoring.">
+                Я не копирую — я понимаю. Выбираю правильный инструмент без лишних итераций. ИИ даёт мне +30% к скорости разработки: генерация моков, тесты, рефакторинг.
+            </span>
+        </p>
+    </section>
+
+    <!-- Philosophy in development -->
+    <section>
+        <h2><span data-ru="⚡ Моя философия в коде" data-en="⚡ My philosophy in code">⚡ Моя философия в коде</span></h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 24px;">
+            <div style="background: #111827; padding: 24px; border-radius: 20px; border: 1px solid #1E293B;">
+                <div style="font-size: 2rem;">⚡</div>
+                <h3 style="margin: 12px 0 8px;"><span data-ru="Мгновенность" data-en="Instantaneity">Мгновенность</span></h3>
+                <p style="color: #9CA3AF;"><span data-ru="Стриминг ответов — не опция, а стандарт. Пользователь не ждёт." data-en="Response streaming is not optional — it's standard. The user doesn't wait.">Стриминг ответов — не опция, а стандарт. Пользователь не ждёт.</span></p>
+            </div>
+            <div style="background: #111827; padding: 24px; border-radius: 20px; border: 1px solid #1E293B;">
+                <div style="font-size: 2rem;">🧠</div>
+                <h3 style="margin: 12px 0 8px;"><span data-ru="Осмысленный ИИ" data-en="Meaningful AI">Осмысленный ИИ</span></h3>
+                <p style="color: #9CA3AF;"><span data-ru="Генерация boilerplate, тестов и документации — но без подмены мышления." data-en="Boilerplate, tests, documentation generation — without replacing thinking.">Генерация boilerplate, тестов и документации — но без подмены мышления.</span></p>
+            </div>
+            <div style="background: #111827; padding: 24px; border-radius: 20px; border: 1px solid #1E293B;">
+                <div style="font-size: 2rem;">🔒</div>
+                <h3 style="margin: 12px 0 8px;"><span data-ru="Безопасность без жертв" data-en="Security without sacrifices">Безопасность без жертв</span></h3>
+                <p style="color: #9CA3AF;"><span data-ru="SHA-256 защищает данные, не создавая лагов." data-en="SHA-256 protects data without lag.">SHA-256 защищает данные, не создавая лагов.</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Goal & contact -->
+    <section id="contact">
+        <h2><span data-ru="🎯 Моя цель" data-en="🎯 My Goal">🎯 Моя цель</span></h2>
+        <p style="font-size: 1.2rem; max-width: 720px; margin-bottom: 32px;">
+            <span data-ru="Я ищу команду, где ценят осмысленную архитектуру, не боятся внедрять ИИ и понимают: хороший код — это код, который работает сегодня, а не «потом, после рефакторинга»." 
+                  data-en="I'm looking for a team that values meaningful architecture, isn't afraid to adopt AI, and understands: good code is code that works today, not 'later, after refactoring'.">
+                Я ищу команду, где ценят осмысленную архитектуру, не боятся внедрять ИИ и понимают: хороший код — это код, который работает сегодня, а не «потом, после рефакторинга».
+            </span>
+        </p>
+        <div style="background: #111827; border-radius: 28px; padding: 32px; text-align: center; border: 1px solid #2D3748;">
+            <p style="margin-bottom: 20px; font-size: 1.1rem;">
+                <span data-ru="📬 Открыт для интересных задач и сильных команд" data-en="📬 Open to interesting challenges and strong teams">📬 Открыт для интересных задач и сильных команд</span>
+            </p>
+            <a href="mailto:haus44199@gmail.com" class="btn btn-primary" style="margin-right: 12px;">
+                <span data-ru="Написать мне" data-en="Email me">Написать мне</span>
+            </a>
+            <a href="https://github.com/haus44199-hub" target="_blank" class="btn">
+                <span data-ru="GitHub / Telegram" data-en="GitHub / Telegram">GitHub / Telegram</span>
+            </a>
+            <p style="margin-top: 24px; font-size: 0.8rem; color: #6B7280;">
+                <span data-ru="Евгений Крамер · Android-разработчик · AI-интеграции" data-en="Evgeny Kramer · Android Developer · AI Integrations">Евгений Крамер · Android-разработчик · AI-интеграции</span>
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <p><span data-ru="«ИИ должен экономить время, а не отнимать его»" data-en="«AI should save time, not waste it»">«ИИ должен экономить время, а не отнимать его»</span></p>
+        <p style="margin-top: 12px;">© 2026 <span data-ru="Евгений Крамер" data-en="Evgeny Kramer">Евгений Крамер</span></p>
+    </footer>
+</div>
+
+<script>
+    // Language switching functionality
+    (function() {
+        const langBtns = document.querySelectorAll('.lang-btn');
+        let currentLang = 'ru';
+        
+        function setLanguage(lang) {
+            document.querySelectorAll('[data-ru], [data-en]').forEach(element => {
+                const translation = element.getAttribute(`data-${lang}`);
+                if (translation) {
+                    if (element.childNodes.length === 1 && element.childNodes[0].nodeType === Node.TEXT_NODE) {
+                        element.textContent = translation;
+                    } else {
+                        element.textContent = translation;
+                    }
+                }
+            });
+            
+            document.querySelectorAll('td, th').forEach(cell => {
+                const translation = cell.getAttribute(`data-${lang}`);
+                if (translation && cell.childNodes.length === 1 && cell.childNodes[0].nodeType === Node.TEXT_NODE) {
+                    cell.textContent = translation;
+                }
+            });
+            
+            langBtns.forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            currentLang = lang;
+            document.documentElement.lang = lang === 'ru' ? 'ru' : 'en';
+            document.title = lang === 'ru' ? 'Евгений Крамер · Android-разработчик' : 'Evgeny Kramer · Android Developer';
+        }
+        
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const lang = btn.getAttribute('data-lang');
+                if (lang && lang !== currentLang) {
+                    setLanguage(lang);
+                }
+            });
+        });
+        
+        setLanguage('ru');
+    })();
+</script>
+
+</body>
+</html>
