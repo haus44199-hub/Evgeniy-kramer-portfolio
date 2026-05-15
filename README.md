@@ -5,7 +5,6 @@
 [![Clean Architecture](https://img.shields.io/badge/Clean_Architecture-3B82F6)](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-**Live preview:** [evgeny-kramer.dev](#) *(add your actual link here)*
 
 ---
 
