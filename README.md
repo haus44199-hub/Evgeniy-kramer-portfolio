@@ -7,7 +7,7 @@
 
 <p align="center">
   <a href="https://haus44199-hub.github.io/Evgeniy-kramer-portfolio/" target="_blank">
-    <kbd> <b>🚀 ОТКРЫТЬ ПОРТФОЛИО 🚀</b> </kbd>
+    <kbd> <b>🚀 OPEN PORTFOLIO 🚀</b> </kbd>
   </a>
 </p>
 
